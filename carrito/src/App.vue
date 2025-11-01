@@ -34,7 +34,7 @@
     if( typeOperation == '-' ){
       if( changeAmount.cantidad == 1 ){
         carrito.value.find( (item, index) => {
-          if( item.cantidad === 1 && item.itemS.id === idArray )
+          if( item.itemS.id === idArray )
             carrito.value.splice(index, 1)
         })
       } else {
@@ -58,7 +58,7 @@
 <template>
   <div class="p-2">
     <div class="w-full mb-5">
-      <h1 class="text-center text-4xl">Ecommerce</h1>
+      <h1 class="text-center text-4xl">Carrito</h1>
     </div>
 
     <div v-if="loading">
