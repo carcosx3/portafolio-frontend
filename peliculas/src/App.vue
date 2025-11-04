@@ -26,7 +26,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen w-screen items-center justify-start bg-slate-900">
+  <div class="flex flex-col min-h-screen w-screen items-center justify-start bg-linear-to-br from-slate-900 to-purple-900">
     <div class="w-5/6">
       <SearchForm @buscar="buscarPeliculas" />
       <MovieList :peliculas="peliculas" class="mt-6"/>
