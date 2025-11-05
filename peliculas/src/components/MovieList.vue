@@ -1,9 +1,14 @@
 <script setup>
+    import { defineEmits } from 'vue';
     import MovieCard from './MovieCard.vue'
 
+    const emit = defineEmits(['childShow'])
     const props = defineProps({
         peliculas: Array
     })
+    const handleEmit = (movieGrandChild) => {
+        emit('childShow', movieGrandChild)
+    }
 
     // console.log( props.peliculas )
 </script>
@@ -14,6 +19,7 @@
             v-for="show in props.peliculas"
             :key="show.id"
             :pelicula="show"
+            @grandChildShow="handleEmit"
         />
     </div>
 </template>

@@ -4,7 +4,7 @@
   import MovieList from './components/MovieList.vue'
 
   const peliculas = ref([])
-
+  const saveShowArray = ref([])
   const buscarPeliculas = (datosBusqueda) => {
     const { query, tipo } = datosBusqueda
     const options = {
@@ -23,13 +23,35 @@
       } )
       .catch( error => console.error(error) )
   }
+  const saveShow = ( show ) => {
+    const itemInArray = saveShowArray.value.find((elmnt) => elmnt.id === show.show.id)
+    if( !itemInArray ){
+      const newShowAdd = {...show.show, rate: show.typeOp}
+
+      saveShowArray.value.push( newShowAdd )
+    } else {
+      console.log( itemInArray.id )
+      if( itemInArray.rate == show.typeOp ){
+        const indxShow = saveShowArray.value.findIndex( (elmnt) => elmnt.id == itemInArray.id )
+        
+        saveShowArray.value.splice(indxShow, 1)
+      } else {
+        itemInArray.rate = show.typeOp
+      }
+    }
+    console.log( saveShowArray.value )
+  }
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen w-screen items-center justify-start bg-linear-to-br from-slate-900 to-purple-900">
+  <div class="flex flex-col min-h-screen w-screen items-center justify-start bg-linear-to-br from-slate-900 to-purple-900 pb-10">
     <div class="w-5/6">
       <SearchForm @buscar="buscarPeliculas" />
-      <MovieList :peliculas="peliculas" class="mt-6"/>
+      <MovieList 
+        :peliculas="peliculas" 
+        @childShow="saveShow"
+        class="mt-6"
+      />
     </div>
   </div>
 </template>
