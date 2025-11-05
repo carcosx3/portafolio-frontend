@@ -1,7 +1,6 @@
 <script setup>
-    import { defineEmits } from 'vue'
+    import { rateShow } from '@/composables/rateShow'
 
-    const emit = defineEmits(['grandChildShow'])
     const props = defineProps({
         pelicula: Object
     })
@@ -10,12 +9,7 @@
             return `https://image.tmdb.org/t/p/w500${imgUrl}`
         }
     }
-    const handleClick = ( operation, showObj ) => {
-        emit( 'grandChildShow', {
-            typeOp: operation,
-            show: showObj
-        } )
-    }
+    const { saveShow } = rateShow();
 </script>
 
 <template>
@@ -35,10 +29,10 @@
                 <h3 class="transition text-center text-md sm:text-lg font-semibold p-2 overflow-hidden text-ellipsis">{{ props.pelicula.title || props.pelicula.name }}</h3>
 
                 <div class="flex items-center justify-between px-2 pb-2 text-sky-500">
-                    <button class="transition hover:text-yellow-500 cursor-pointer" @click="handleClick('like', props.pelicula)">
+                    <button class="transition hover:text-yellow-500 cursor-pointer" @click="saveShow(props.pelicula, 'like')">
                         <span class="material-symbols-outlined">thumb_up</span>
                     </button>
-                    <button class="transition hover:text-yellow-500 cursor-pointer" @click="handleClick('dislike', props.pelicula)">
+                    <button class="transition hover:text-yellow-500 cursor-pointer" @click="saveShow(props.pelicula, 'dislike')">
                         <span class="material-symbols-outlined">thumb_down</span>
                     </button>
                 </div>
