@@ -1,4 +1,5 @@
 <script setup>
+    const emit = defineEmits(['toggleCompletada'])
     const props = defineProps({
         tareasArray: Array
     })
@@ -10,7 +11,12 @@
             <li
                 v-for="tarea in props.tareasArray"
                 :key="tarea.id"
+                :tarea="tarea"
             >
+                <input type="checkbox" 
+                    v-model="tarea.completada"
+                    @change="$emit('toggleCompletada', tarea)"
+                    >
                 {{ tarea.titulo }}
             </li>
         </ul>

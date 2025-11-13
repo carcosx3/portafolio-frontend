@@ -2,11 +2,14 @@
     import Tarea from '@/components/Tarea.vue'
     import { fetchTareas } from '@/composables/fetchApi';
 
-    const { lista } = fetchTareas();
+    const { lista, toggleCompleted } = fetchTareas();
 </script>
 
 <template>
-    <Tarea :tareasArray="lista" />
+    <Tarea 
+        :tareasArray="lista" 
+        @toggleCompletada="toggleCompleted"
+        />
 </template>
 
 <style scoped>
