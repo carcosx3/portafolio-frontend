@@ -1,25 +1,19 @@
 <script setup>
     const emit = defineEmits(['toggleCompletada'])
     const props = defineProps({
-        tareasArray: Array
+        tareaObj: Object
     })
+    const handleCompleted = () => { emit('toggleCompletada', props.tareaObj); console.log(props.tareaObj) }
 </script>
 
 <template>
-    <div>
-        <ul>
-            <li
-                v-for="tarea in props.tareasArray"
-                :key="tarea.id"
-                :tarea="tarea"
+    <div class="flex items-center">
+        <input type="checkbox" 
+            v-model="props.tareaObj.completada"
+            @change="handleCompleted"
+            class="mr-2"
             >
-                <input type="checkbox" 
-                    v-model="tarea.completada"
-                    @change="$emit('toggleCompletada', tarea)"
-                    >
-                {{ tarea.titulo }}
-            </li>
-        </ul>
+        {{ props.tareaObj.titulo }}
     </div>
 </template>
 

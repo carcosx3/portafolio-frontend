@@ -6,10 +6,17 @@
 </script>
 
 <template>
-    <Tarea 
-        :tareasArray="lista" 
-        @toggleCompletada="toggleCompleted"
-        />
+    <ul>
+        <li
+            v-for="tarea in lista"
+            :key="tarea.id"
+        >
+            <Tarea 
+                :tareaObj="tarea" 
+                @toggleCompletada="toggleCompleted"
+            />
+        </li>
+    </ul>
 </template>
 
 <style scoped>

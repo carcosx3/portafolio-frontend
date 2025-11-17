@@ -10,29 +10,26 @@ export function fetchTareas () {
                 console.log(data)
                 lista.value = data 
             })
-            .catch( err => console.debug( err.msg ) )
+            .catch( err => console.error( err.msg ) )
     }
 
     const toggleCompleted = async(tarea) => {
         console.log(`Actualizando Tarea: ${tarea.id}, Nuevo Estado: ${tarea.completada}`)
 
         try{
-            const { data, error } = await useFetch(`https://localhost:7018/api/Tareas/${tarea.id}`, {
+            await fetch(`https://localhost:7018/api/Tareas/${tarea.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(tarea)
             })
-
-            if( !response.ok ){
-                throw new Error('Error al actualizar la tarea')
-            }
+            .catch(error => console.error(error.message))
 
             console.log('Tarea Actualizada en la BD!')
         }
         catch( error ){
-            console.debug( error.message )
+            console.error( error.message )
         }
     }
 
