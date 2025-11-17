@@ -3,7 +3,7 @@
     const props = defineProps({
         tareaObj: Object
     })
-    const handleCompleted = () => { emit('toggleCompletada', props.tareaObj); console.log(props.tareaObj) }
+    const handleCompleted = () => { emit('toggleCompletada', props.tareaObj)}
 </script>
 
 <template>
